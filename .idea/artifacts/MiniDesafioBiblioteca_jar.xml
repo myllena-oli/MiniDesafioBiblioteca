@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MiniDesafioBiblioteca:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MiniDesafioBiblioteca_jar</output-path>
+    <root id="archive" name="MiniDesafioBiblioteca.jar">
+      <element id="module-output" name="MiniDesafioBiblioteca" />
+    </root>
+  </artifact>
+</component>
