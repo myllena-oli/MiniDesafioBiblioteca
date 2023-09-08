@@ -17,16 +17,18 @@ public class AuthorService {
 
     public AuthorService() {
         connection = DatabaseConnection.makingConnection();
+        authorDAO = new AuthorDAO();
     }
-
 
 
     public Author insertAuthor(String name) {
 
 
-        for (Author author : listAuthors()) {
-            if (author.getName().equals(name)) {
-                return author;
+        if (!listAuthors().isEmpty()) {
+            for (Author author : listAuthors()) {
+                if (author.getName().equals(name)) {
+                    return author;
+                }
             }
         }
 

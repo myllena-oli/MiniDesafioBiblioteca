@@ -15,10 +15,11 @@ public class BookDAO {
 
     public BookDAO() {
         connection = DatabaseConnection.makingConnection();
+        authorDAO = new AuthorDAO();
     }
 
     public void insertBook(Book book) {
-        String insertBookQuery = "INSERT INTO books (title, author_id) VALUES (?, (SELECT id FROM authors WHERE name = ?))";
+        String insertBookQuery = "INSERT INTO books (title, author) VALUES (?, (SELECT id FROM authors WHERE name = ?))";
 
         try (PreparedStatement statement = connection.prepareStatement(insertBookQuery)) {
             statement.setString(1, book.getTitle());
@@ -58,7 +59,8 @@ public class BookDAO {
     public List<Book> listBooks() {
         List<Book> books = new ArrayList<>();
         //String listBooksQuery = "SELECT * FROM books";
-        String listBooksQuery = "SELECT books.title, authors.name FROM books JOIN authors ON books.author_id = authors.id";
+        //String listBooksQuery = "SELECT b.id, b.title, a.name AS author_name FROM books b JOIN authors a ON b.author = a.id";
+        String listBooksQuery = "SELECT books.id, books.title, authors.name FROM books JOIN authors ON books.author = authors.id";
 
 
         try (PreparedStatement statement = connection.prepareStatement(listBooksQuery)) {
@@ -69,7 +71,7 @@ public class BookDAO {
                 Book book = new Book();
                 book.setId(resultSet.getLong("id"));
                 book.setTitle(resultSet.getString("title"));
-                String name = resultSet.getString("author");
+                String name = resultSet.getString("name");
                 Author author = getSpecificAuthor(name);
                 book.setAuthor(author);
                 books.add(book);

@@ -11,11 +11,11 @@ public class DatabaseConnection {
         try {
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                     "postgres", "1234");
-            if (connection != null) {
-                System.out.println("Conexão com o banco de dados bem sucedida! :D");
-            } else {
-                System.out.println("Conexão com o banco infelizmente FALHOU! :(");
-            }
+//            if (connection != null) {
+//                System.out.println("Conexão com o banco de dados bem sucedida! :D");
+//            } else {
+//                System.out.println("Conexão com o banco infelizmente FALHOU! :(");
+//            }
             return connection;
         } catch (SQLException e) {
             e.printStackTrace();

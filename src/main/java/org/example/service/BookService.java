@@ -17,6 +17,7 @@ public class BookService {
 
     public BookService() {
         connection = DatabaseConnection.makingConnection();
+        bookDAO = new BookDAO();
     }
 
     public void insertBook(String title, Author author) {
@@ -50,7 +51,6 @@ public class BookService {
 
     public List<Book> listBooks() {
         return bookDAO.listBooks();
-
     }
 
     public void deleteBook(String title) {

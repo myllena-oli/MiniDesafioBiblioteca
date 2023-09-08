@@ -43,13 +43,16 @@ public class BookLoanDAO {
     }
 
     public void listLoans() {
-        String listLoansQuery = "SELECT books.title, authors.name FROM books JOIN authors ON books.author_id = authors.id";
+        String listLoansQuery = "SELECT books.title, authors.name, borrows.borrower FROM borrows JOIN books ON borrows.book_id = books.id" +
+                " JOIN authors ON books.author = authors.id";
 
         try (PreparedStatement statement = connection.prepareStatement(listLoansQuery)) {
             ResultSet resultSet = statement.executeQuery();
-            System.out.println("Livros:");
+            System.out.println("Empréstimos:");
             while (resultSet.next()) {
-                System.out.println("Título: " + resultSet.getString("title") + ", Autor: " + resultSet.getString("name"));
+                System.out.println("Título: " + resultSet.getString("title")
+                        + ", Autor: " + resultSet.getString("name")
+                        + ", Empréstimo para: "+ resultSet.getString("borrower"));
             }
             System.out.println();
         } catch (SQLException e) {

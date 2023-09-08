@@ -191,11 +191,16 @@ public class Application {
     }
 
     private void listBooks() {
-        System.out.println(bookService.listBooks());
+        for (Book book: bookService.listBooks()) {
+            System.out.println("id: "+book.getId()+"    Título: "+book.getTitle()+"   Autor: "+book.getAuthor().getName());
+
+        }
     }
 
     private void listAuthor() {
-        System.out.println(authorService.listAuthors());
+        for (Author author: authorService.listAuthors()) {
+            System.out.println("Nome: "+author.getName());
+        }
     }
 
     private void listLoans() {
@@ -210,11 +215,10 @@ public class Application {
         System.out.println("3 - Inserir impréstimo");
         System.out.println("4 - Atualizar livro");
         System.out.println("5 - Atualizar autor");
-        System.out.println("6 - Atualizar emprestimo");
-        System.out.println("7 - Excluir livro");
-        System.out.println("8 - Listar livros");
-        System.out.println("9 - Listar autores");
-        System.out.println("10 - Listar emprestimos");
+        System.out.println("6 - Excluir livro");
+        System.out.println("7 - Listar livros");
+        System.out.println("8 - Listar autores");
+        System.out.println("9 - Listar emprestimos");
         System.out.println("0 - Sair");
     }
 

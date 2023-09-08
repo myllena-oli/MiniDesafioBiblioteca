@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.connection.DatabaseConnection;
+import org.example.dao.BookLoanDAO;
 import org.example.model.Book;
 
 import java.sql.Connection;
@@ -12,9 +13,12 @@ public class BookLoanService {
 
     Connection connection;
     BookService bookService;
+    BookLoanDAO bookLoanDAO;
 
     public BookLoanService() {
         connection = DatabaseConnection.makingConnection();
+        bookService = new BookService();
+        bookLoanDAO = new BookLoanDAO();
     }
 
 
@@ -45,18 +49,7 @@ public class BookLoanService {
 
 
     public void listLoans() {
-        String listLoansQuery = "SELECT books.title, authors.name FROM books JOIN authors ON books.author_id = authors.id";
-
-        try (PreparedStatement statement = connection.prepareStatement(listLoansQuery)) {
-            ResultSet resultSet = statement.executeQuery();
-            System.out.println("Livros:");
-            while (resultSet.next()) {
-                System.out.println("Título: " + resultSet.getString("title") + ", Autor: " + resultSet.getString("name"));
-            }
-            System.out.println();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        bookLoanDAO.listLoans();
     }
 
     public void listBorrows(Connection connection) throws SQLException {
